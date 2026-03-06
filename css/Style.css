@@ -1,0 +1,440 @@
+/* General CSS */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Montserrat:wght@400;500;700;800;900&display=swap');
+
+*,
+*::before,
+*::after {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+text-decoration: none;
+outline: none;
+}
+
+body{
+padding-top:100px;
+position:relative;
+z-index:1;
+}
+
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
+background-image:url('../images/church_bg_img.jpeg');
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+
+filter:blur(3px);
+transform:scale(1.05);
+
+z-index:-1;
+}
+
+:root{
+--primary-color:#008AFC;
+--secondary-color:#014EBC;
+--light-color:#CCCCCC;
+--black-color:#000;
+--white-color:#fff;
+--box-shadow:0.1rem -0.07rem 1.5rem 0.3rem rgb(0 0 0 / 26%);
+
+--primary-font:'Lato', sans-serif;
+--secondary-font:'Montserrat', sans-serif;
+}
+
+body,html{
+font-size:10px;
+font-weight:400;
+font-family:var(--primary-font);
+scroll-behavior:smooth;
+overflow-x:hidden;
+line-height:1.5;
+}
+
+h1{
+color:var(--black-color);
+font-size:5.5rem;
+font-weight:800;
+font-family:var(--secondary-font);
+text-transform:uppercase;
+margin-bottom:2rem;
+}
+
+h2{
+color:var(--secondary-color);
+font-size:6rem;
+font-weight:700;
+font-family:var(--secondary-font);
+text-transform:uppercase;
+margin-bottom:2rem;
+line-height: 1.6;
+}
+
+h2 span{
+font-family: "Comic Sans MS", "Comic Sans", cursive;
+font-weight: bold;
+font-size: 8rem;
+color: #3b3307;
+display: block;
+line-height: 1.2;
+letter-spacing: 2px;
+}
+
+h2 span{
+color: var(--primary-color);
+font-size: 7rem;
+display: block;
+margin-top: 2rem;
+line-height: 1.2;
+}
+
+h3{
+font-size:3rem;
+font-weight:800;
+font-family:var(--secondary-font);
+color:var(--white-color);
+margin-bottom:1rem;
+}
+
+h4{
+font-size:3rem;
+font-weight:500;
+font-family:var(--secondary-font);
+color:var(--black-color);
+margin-bottom:2rem;
+}
+
+h5{
+font-size:1.6rem;
+color:var(--white-color);
+font-family:var(--secondary-font);
+margin-bottom:.9rem;
+font-weight:300;
+text-transform:uppercase;
+}
+
+p{
+font-size:1.6rem;
+font-weight:500;
+line-height:1.5;
+letter-spacing:1px;
+margin-top:1rem;
+color:var(--white-color);
+z-index: 2;
+}
+
+a,
+a:active,
+a:focus,
+a:hover,
+.btn:focus{
+text-decoration:none;
+box-shadow:none;
+outline:0;
+}
+
+.main-btn{
+color:var(--white-color);
+background-color:var(--purple-color);
+border-radius:5rem;
+padding:.9rem 3rem;
+font-family:var(--secondary-font);
+font-weight:500;
+font-size:1.5rem;
+margin-top: 6rem;
+transition:all .3s linear;
+box-shadow:0 1px 4px rgba(0,0,0,.3);
+}
+
+.main-btn:hover{
+background:var(--secondary-color);
+color:var(--white-color);
+}
+
+.view-link{
+font-size:1.4rem;
+margin-top:1rem;
+color:var(--white-color);
+transition:all .3s ease-in-out;
+}
+
+.view-link:hover{
+font-size:1.6rem;
+}
+
+/* spacing wrapper */
+
+.wrapper{
+padding:7rem 0;
+}
+
+/* NAVBAR */
+
+.header{
+background-color:var(--black-color);
+padding:1rem 0;
+}
+
+.header .navbar-brand img{
+width:50px;
+height:50px;
+object-fit:cover;
+transform:scale(1.5);
+transform-origin:left center;
+}
+.church-title{
+color:#f2f1ee;
+font-size:1.8rem;
+font-weight:700;
+font-family:var(--secondary-font);
+white-space:nowrap;
+}
+
+.header .navbar-nav .nav-link{
+color:var(--white-color);
+font-family:var(--secondary-font);
+text-transform:uppercase;
+font-size:1.3rem;
+font-weight:600;
+padding:.5rem 2rem;
+margin:0 .2rem;
+}
+
+.header .dropdown-menu{
+min-width:13rem;
+padding:1.5rem 0;
+background-color:var(--black-color);
+border:.2rem solid var(--primary-color);
+}
+
+.header .dropdown-item{
+line-height:1.3;
+padding:1rem;
+font-size:1.3rem;
+color:var(--white-color);
+font-weight:600;
+font-family:var(--secondary-font);
+}
+
+.dropdown-toggle::after{
+content:"+";
+border:none;
+vertical-align:middle;
+font-size:1.6rem;
+}
+
+.nav-item:hover>.dropdown-toggle::after,
+.nav-link.dropdown-toggle.show{
+color:var(--primary-color);
+}
+
+.dropdown-item:focus,
+.dropdown-item:hover,
+.header .navbar-nav .nav-link:hover{
+color:var(--primary-color);
+background-color:transparent;
+}
+
+.navbar-nav li:hover>ul.dropdown-menu{
+display:block;
+}
+
+.header .navbar-toggler{
+color:var(--white-color);
+font-size:2rem;
+height:2.7rem;
+padding:0;
+}
+
+.header .navbar-toggler:focus{
+outline:none;
+box-shadow:none;
+}
+
+/* BANNER SECTION */
+
+.banner-wrapper{
+margin-top:40px;
+
+position:relative;
+overflow:hidden;
+width:100%;
+padding-bottom:5rem;
+}
+
+.banner-wrapper::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
+
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+
+filter:blur(1px);
+transform:scale(1.1);
+z-index:0;
+}
+
+.banner-wrapper .container{
+position:relative;
+z-index:2;
+}
+
+.img-fluid{
+border-radius:20px;
+
+}
+
+.top-line{
+display:block;
+text-align:center;
+margin-bottom:10px;
+
+}
+
+
+.main-heading{
+text-align:center;
+font-size:6rem;
+}
+
+.main-heading span{
+display:block;
+margin-top:10px;
+}
+
+.updates-section{
+background:transparent;
+padding:80px 0;
+}
+
+.update-card{
+text-align:center;
+}
+
+.update-icon{
+width:220px;
+height:220px;
+border-radius:50%;
+object-fit:cover;
+}
+
+.update-card h3{
+font-size:2.5rem;
+font-weight:700;
+margin-top:20px;
+}
+.updates-section h3{
+color: #f4f3ed;
+}
+.update-card{
+display:block;
+text-decoration:none;
+color:#f4f3ed;
+}
+.update-card:hover{
+transform:scale(1.05);
+transition:0.3s;
+}
+.mary-img{
+width:1500px;
+height:800px;
+display:block;
+margin:0 auto;
+object-fit:cover;
+}
+
+.mb-5{
+    color:var(--primary-color);
+    margin-bottom: 20px;
+}
+/* FOOTER */
+
+.footer_wrapper{
+background-color:var(--black-color);
+padding-bottom:0;
+margin-top:20px;
+}
+
+.footer_wrapper .footer-logo img{
+width:300px;
+height:200px;
+object-fit:cover;
+}
+.church-name{
+color:#f4f3ed;
+font-family: "Comic Sans MS", "Comic Sans", cursive;
+font-size:2rem;
+font-weight:700;
+font-family:var(--secondary-font);
+text-transform:uppercase;
+letter-spacing:2px;
+}
+
+.footer_wrapper h5{
+color:var(--white-color);
+margin-bottom:2rem;
+font-weight:600;
+font-size:2rem;
+}
+
+.footer_wrapper ul{
+list-style:none;
+display:flex;
+align-items:center;
+}
+
+.footer_wrapper ul li{
+margin-right:1.5rem;
+}
+
+.footer_wrapper .copyright-section p{
+margin:0;
+padding:3rem 0;
+text-align:center;
+}
+.link-widget{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:15px;
+}
+
+.link-widget li{
+list-style:none;
+}
+
+.link-widget li img{
+width:40px;
+height:40px;
+object-fit:contain;
+}
+
+/* WHATSAPP BUTTON */
+
+.whatsapp-icon{
+position:relative;
+}
+
+.whatsapp-icon .whatsapp{
+position:fixed;
+width:6rem;
+z-index:1;
+bottom:1rem;
+right:.5rem;
+}
+
+.whatsapp-icon .whatsapp img{
+width:5.5rem;
+}
