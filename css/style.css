@@ -4,392 +4,503 @@
 *,
 *::before,
 *::after {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-text-decoration: none;
-outline: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  outline: none;
 }
 
-body{
-padding-top:100px;
-position:relative;
-z-index:1;
+:root {
+  --primary-color: #0f7fcf;
+  --secondary-color: #173d6f;
+  --accent-color: #c7a15c;
+  --ink-color: #171717;
+  --muted-color: #667085;
+  --light-color: #f7f4ee;
+  --white-color: #fff;
+  --black-color: #050505;
+  --surface-color: rgba(255, 255, 255, 0.94);
+  --box-shadow: 0 18px 45px rgba(0, 0, 0, 0.14);
+  --primary-font: 'Lato', sans-serif;
+  --secondary-font: 'Montserrat', sans-serif;
 }
 
-body::before{
-content:"";
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-
-background-image:url("../images/church_bg_img.jpeg");
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-
-filter:blur(6px);
-transform:scale(1.05);
-
-z-index:-1;
+body,
+html {
+  font-size: 10px;
+  font-weight: 400;
+  font-family: var(--primary-font);
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  line-height: 1.5;
+  color: var(--ink-color);
+  background: var(--light-color);
 }
 
-:root{
---primary-color:#008AFC;
---secondary-color:#014EBC;
---light-color:#CCCCCC;
---black-color:#000;
---white-color:#fff;
---box-shadow:0.1rem -0.07rem 1.5rem 0.3rem rgb(0 0 0 / 26%);
-
---primary-font:'Lato', sans-serif;
---secondary-font:'Montserrat', sans-serif;
+body {
+  padding-top: 82px;
+  position: relative;
 }
 
-body,html{
-font-size:10px;
-font-weight:400;
-font-family:var(--primary-font);
-scroll-behavior:smooth;
-overflow-x:hidden;
-line-height:1.5;
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  margin: 0;
 }
 
-h1{
-color:var(--black-color);
-font-size:5.5rem;
-font-weight:800;
-font-family:var(--secondary-font);
-text-transform:uppercase;
-margin-bottom:2rem;
+h1,
+h2,
+h3 {
+  font-family: var(--secondary-font);
 }
 
-h2{
-color:var(--secondary-color);
-font-size:6rem;
-font-weight:700;
-font-family:var(--secondary-font);
-text-transform:uppercase;
-margin-bottom:2rem;
-line-height: 1.6;
+h1 {
+  color: var(--white-color);
+  font-size: clamp(4.2rem, 7vw, 8.8rem);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  max-width: 900px;
 }
 
-h2 span{
-color: var(--primary-color);
-font-size: 7rem;
-display: block;
-margin-top: 2rem;
-line-height: 1.2;
+h2 {
+  color: var(--secondary-color);
+  font-size: clamp(3rem, 4vw, 5.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
 }
 
-h3{
-font-size:3rem;
-font-weight:800;
-font-family:var(--secondary-font);
-color:var(--white-color);
-margin-bottom:1rem;
+h3 {
+  color: var(--secondary-color);
+  font-size: 2.4rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1rem;
 }
 
-h4{
-font-size:3rem;
-font-weight:500;
-font-family:var(--secondary-font);
-color:var(--black-color);
-margin-bottom:2rem;
+h5 {
+  color: var(--white-color);
+  font-family: var(--secondary-font);
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
 }
 
-h5{
-font-size:1.6rem;
-color:var(--white-color);
-font-family:var(--secondary-font);
-margin-bottom:.9rem;
-font-weight:300;
-text-transform:uppercase;
-}
-
-p{
-font-size:1.6rem;
-font-weight:500;
-line-height:1.5;
-letter-spacing:1px;
-margin-top:1rem;
-color:var(--white-color);
-z-index:2;
+p {
+  color: var(--muted-color);
+  font-size: 1.7rem;
+  font-weight: 500;
+  line-height: 1.65;
 }
 
 a,
 a:active,
 a:focus,
 a:hover,
-.btn:focus{
-text-decoration:none;
-box-shadow:none;
-outline:0;
+.btn:focus {
+  text-decoration: none;
+  box-shadow: none;
+  outline: 0;
 }
 
-.main-btn{
-color:var(--white-color);
-background-color:var(--purple-color);
-border-radius:5rem;
-padding:.9rem 3rem;
-font-family:var(--secondary-font);
-font-weight:500;
-font-size:1.5rem;
-margin-top:6rem;
-transition:all .3s linear;
-box-shadow:0 1px 4px rgba(0,0,0,.3);
+.wrapper {
+  padding: 7rem 0;
 }
 
-.main-btn:hover{
-background:var(--secondary-color);
-color:var(--white-color);
+.section-pad {
+  padding: 8rem 0;
 }
 
-.wrapper{
-padding:7rem 0;
+.section-kicker,
+.eyebrow {
+  color: var(--accent-color);
+  font-family: var(--secondary-font);
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.section-heading {
+  max-width: 720px;
+  margin: 0 auto 4.5rem;
+}
+
+.main-btn,
+.secondary-btn {
+  align-items: center;
+  border-radius: 999px;
+  display: inline-flex;
+  font-family: var(--secondary-font);
+  font-size: 1.5rem;
+  font-weight: 800;
+  justify-content: center;
+  min-height: 48px;
+  padding: 1.2rem 2.8rem;
+  transition: all 0.25s ease;
+}
+
+.main-btn {
+  background: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  color: var(--white-color);
+}
+
+.main-btn:hover {
+  background: #a88342;
+  border-color: #a88342;
+  color: var(--white-color);
+  transform: translateY(-2px);
+}
+
+.secondary-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  color: var(--white-color);
+}
+
+.secondary-btn:hover {
+  background: var(--white-color);
+  color: var(--secondary-color);
 }
 
 /* NAVBAR */
 
-.header{
-background-color:var(--black-color);
-padding:1rem 0;
+.header {
+  background-color: var(--black-color);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 1rem 0;
 }
 
-.header .navbar-brand img{
-width:50px;
-height:50px;
-object-fit:cover;
-transform:scale(1.5);
-transform-origin:left center;
+.header .navbar-brand img {
+  border-radius: 50%;
+  height: 50px;
+  object-fit: cover;
+  width: 50px;
 }
 
-.church-title{
-color:#f2f1ee;
-font-size:1.8rem;
-font-weight:700;
-font-family:var(--secondary-font);
-white-space:nowrap;
+.church-title {
+  color: #f2f1ee;
+  font-family: var(--secondary-font);
+  font-size: 1.8rem;
+  font-weight: 800;
+  white-space: nowrap;
 }
 
-.header .navbar-nav .nav-link{
-color:var(--white-color);
-font-family:var(--secondary-font);
-text-transform:uppercase;
-font-size:1.3rem;
-font-weight:600;
-padding:.5rem 2rem;
-margin:0 .2rem;
+.header .navbar-nav .nav-link {
+  color: var(--white-color);
+  font-family: var(--secondary-font);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0.1rem;
+  padding: 0.6rem 1.2rem;
+  text-transform: uppercase;
 }
 
-.header .dropdown-menu{
-min-width:13rem;
-padding:1.5rem 0;
-background-color:var(--black-color);
-border:.2rem solid var(--primary-color);
+.header .dropdown-menu {
+  background-color: var(--black-color);
+  border: 0.2rem solid var(--primary-color);
+  min-width: 18rem;
+  padding: 1rem 0;
 }
 
-.header .dropdown-item{
-line-height:1.3;
-padding:1rem;
-font-size:1.3rem;
-color:var(--white-color);
-font-weight:600;
-font-family:var(--secondary-font);
+.header .dropdown-item {
+  color: var(--white-color);
+  font-family: var(--secondary-font);
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.3;
+  padding: 0.9rem 1.2rem;
 }
 
-.dropdown-toggle::after{
-content:"+";
-border:none;
-vertical-align:middle;
-font-size:1.6rem;
-}
-
-.nav-item:hover>.dropdown-toggle::after,
-.nav-link.dropdown-toggle.show{
-color:var(--primary-color);
+.dropdown-toggle::after {
+  border: none;
+  content: "+";
+  font-size: 1.6rem;
+  vertical-align: middle;
 }
 
 .dropdown-item:focus,
 .dropdown-item:hover,
-.header .navbar-nav .nav-link:hover{
-color:var(--primary-color);
-background-color:transparent;
+.header .navbar-nav .nav-link:hover,
+.header .navbar-nav .nav-link.active {
+  background-color: transparent;
+  color: var(--accent-color);
 }
 
-.navbar-nav li:hover>ul.dropdown-menu{
-display:block;
+.navbar-nav li:hover > ul.dropdown-menu {
+  display: block;
 }
 
-.header .navbar-toggler{
-color:var(--white-color);
-font-size:2rem;
-height:2.7rem;
-padding:0;
+.header .navbar-toggler {
+  color: var(--white-color);
+  font-size: 2rem;
+  height: 2.7rem;
+  padding: 0;
 }
 
-.header .navbar-toggler:focus{
-outline:none;
-box-shadow:none;
+.header .navbar-toggler:focus {
+  box-shadow: none;
+  outline: none;
 }
 
-/* BANNER SECTION */
+/* HERO */
 
-.banner-wrapper{
-margin-top:40px;
-position:relative;
-overflow:hidden;
-width:100%;
-padding-bottom:5rem;
+.hero-section {
+  align-items: center;
+  background-image: url("../images/Church-Entrance-Main.jpg");
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  min-height: calc(100vh - 82px);
+  overflow: hidden;
+  position: relative;
 }
 
-.banner-wrapper::before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-
-filter:blur(1px);
-transform:scale(1.1);
-z-index:0;
+.hero-section::after {
+  background: linear-gradient(180deg, rgba(247, 244, 238, 0), var(--light-color));
+  bottom: 0;
+  content: "";
+  height: 18%;
+  left: 0;
+  position: absolute;
+  width: 100%;
 }
 
-.img-fluid{
-border-radius:20px;
+.hero-overlay {
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.76), rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.08));
+  inset: 0;
+  position: absolute;
 }
 
-.updates-section{
-background:transparent;
-padding:80px 0;
+.hero-content {
+  padding-bottom: 7rem;
+  padding-top: 7rem;
+  position: relative;
+  z-index: 1;
 }
 
-.update-card{
-text-align:center;
-display:block;
-text-decoration:none;
-color:#f4f3ed;
+.hero-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(1.9rem, 2.4vw, 2.4rem);
+  margin-top: 2.4rem;
+  max-width: 720px;
 }
 
-.update-icon{
-width:220px;
-height:220px;
-border-radius:50%;
-object-fit:cover;
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 3.5rem;
 }
 
-.update-card h3{
-font-size:2.5rem;
-font-weight:700;
-margin-top:20px;
+/* QUICK LINKS */
+
+.quick-links-section {
+  margin-top: -5rem;
+  position: relative;
+  z-index: 2;
 }
 
-.updates-section h3{
-color:#f4f3ed;
+.quick-links-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
 }
 
-.update-card:hover{
-transform:scale(1.05);
-transition:0.3s;
+.quick-link-card,
+.update-card {
+  background: var(--surface-color);
+  border: 1px solid rgba(23, 61, 111, 0.08);
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  display: block;
+  height: 100%;
+  padding: 3rem;
+  transition: all 0.25s ease;
 }
 
-.mary-img{
-width:1500px;
-height:800px;
-display:block;
-margin:0 auto;
-object-fit:cover;
+.quick-link-card:hover,
+.update-card:hover {
+  transform: translateY(-6px);
 }
 
-.mb-5{
-color:var(--primary-color);
-margin-bottom:20px;
+.quick-icon {
+  align-items: center;
+  background: rgba(15, 127, 207, 0.12);
+  border-radius: 50%;
+  color: var(--primary-color);
+  display: inline-flex;
+  font-size: 2.4rem;
+  height: 58px;
+  justify-content: center;
+  margin-bottom: 2rem;
+  width: 58px;
+}
+
+/* SECTIONS */
+
+.about-section,
+.community-section {
+  background: var(--light-color);
+}
+
+.section-image {
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  height: 520px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.about-section p:not(.section-kicker),
+.community-section p:not(.section-kicker) {
+  margin-bottom: 1.6rem;
+}
+
+.updates-section {
+  background: var(--white-color);
+}
+
+.update-card {
+  text-align: center;
+}
+
+.update-icon {
+  border-radius: 50%;
+  height: 170px;
+  margin-bottom: 2.2rem;
+  object-fit: cover;
+  width: 170px;
+}
+
+.update-card p {
+  margin-top: 0.6rem;
+}
+
+.stat-row {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 3rem 0;
+}
+
+.stat-row div {
+  background: rgba(255, 255, 255, 0.72);
+  border-radius: 8px;
+  padding: 2rem 1.5rem;
+}
+
+.stat-row span {
+  color: var(--primary-color);
+  display: block;
+  font-family: var(--secondary-font);
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.stat-row p {
+  color: var(--ink-color);
+  font-size: 1.4rem;
+  margin-top: 0.8rem;
+}
+
+.cta-section {
+  background-image: linear-gradient(90deg, rgba(5, 5, 5, 0.84), rgba(23, 61, 111, 0.74)), url("../images/church_bg_img.jpeg");
+  background-position: center;
+  background-size: cover;
+  padding: 7rem 0;
+}
+
+.cta-section h2 {
+  color: var(--white-color);
+  margin-bottom: 0;
 }
 
 /* FOOTER */
 
-.footer_wrapper{
-background-color:var(--black-color);
-padding-bottom:0;
-margin-top:20px;
+.footer_wrapper {
+  background-color: var(--black-color);
+  padding-bottom: 0;
 }
 
-.footer_wrapper .footer-logo img{
-width:300px;
-height:200px;
-object-fit:cover;
+.footer_wrapper .footer-logo img {
+  border-radius: 8px;
+  height: 150px;
+  object-fit: cover;
+  width: 230px;
 }
 
-.church-name{
-color:#f4f3ed;
-font-family:var(--secondary-font);
-font-size:2rem;
-font-weight:700;
-text-transform:uppercase;
-letter-spacing:2px;
+.church-name {
+  color: #f4f3ed;
+  font-family: var(--secondary-font);
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.footer_wrapper h5{
-color:var(--white-color);
-margin-bottom:2rem;
-font-weight:600;
-font-size:2rem;
+.footer_wrapper h5 a,
+.footer_wrapper h5 {
+  color: var(--white-color);
 }
 
-.footer_wrapper ul{
-list-style:none;
-display:flex;
-align-items:center;
+.footer_wrapper h5 a:hover {
+  color: var(--accent-color);
 }
 
-.footer_wrapper ul li{
-margin-right:1.5rem;
+.footer_wrapper ul {
+  align-items: center;
+  display: flex;
+  list-style: none;
 }
 
-.footer_wrapper .copyright-section p{
-margin:0;
-padding:3rem 0;
-text-align:center;
+.link-widget {
+  align-items: center;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
 }
 
-.link-widget{
-display:flex;
-justify-content:center;
-align-items:center;
-gap:15px;
+.link-widget li img {
+  height: 40px;
+  object-fit: contain;
+  width: 40px;
 }
 
-.link-widget li{
-list-style:none;
+.footer_wrapper .copyright-section {
+  background: #000;
 }
 
-.link-widget li img{
-width:40px;
-height:40px;
-object-fit:contain;
+.footer_wrapper .copyright-section p {
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0;
+  padding: 2.2rem 0;
+  text-align: center;
 }
 
 /* WHATSAPP BUTTON */
 
-.whatsapp-icon{
-position:relative;
+.whatsapp-icon {
+  position: relative;
 }
 
-.whatsapp-icon .whatsapp{
-position:fixed;
-width:6rem;
-z-index:1;
-bottom:1rem;
-right:.5rem;
+.whatsapp-icon .whatsapp {
+  bottom: 1rem;
+  position: fixed;
+  right: 0.8rem;
+  width: 6rem;
+  z-index: 5;
 }
 
-.whatsapp-icon .whatsapp img{
-width:5.5rem;
+.whatsapp-icon .whatsapp img {
+  width: 5.5rem;
 }

@@ -1,71 +1,139 @@
-/* Media Query 1170px */
-@media (max-width:1199.5px){
+/* Media Query 1199px */
+@media (max-width: 1199.5px) {
+  .header .navbar-nav .nav-link {
+    padding: 0.6rem 0.8rem;
+  }
 
-/* process */
-.process-wrapper .process-content{
-padding:4rem 1rem;
-}
-
+  .section-image {
+    height: 460px;
+  }
 }
 
 /* Media Query 991px */
-@media (max-width:991.5px){
+@media (max-width: 991.5px) {
+  body {
+    padding-top: 78px;
+  }
 
-/* Navbar */
-.header .navbar-collapse{
-padding:.6rem .5rem;
-margin-bottom:2rem;
-}
+  .header .navbar-collapse {
+    margin-bottom: 1rem;
+    padding: 1.2rem 0.5rem;
+  }
 
-/* banner */
-.banner-wrapper{
-margin-top:4rem;
-padding:4rem 2rem;
-min-height:729px;
-}
+  .header .navbar-nav .nav-link {
+    padding: 1rem 0;
+  }
 
+  .header .dropdown-menu {
+    border-color: rgba(255, 255, 255, 0.18);
+    margin-bottom: 1rem;
+  }
+
+  .hero-section {
+    min-height: 680px;
+  }
+
+  .hero-overlay {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.5));
+  }
+
+  .quick-links-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-links-section {
+    margin-top: 0;
+    padding-top: 3rem;
+  }
+
+  .section-pad {
+    padding: 6rem 0;
+  }
+
+  .section-image {
+    height: 420px;
+  }
+
+  .cta-section {
+    text-align: center;
+  }
 }
 
 /* Media Query 767px */
-@media (max-width:767.5px){
+@media (max-width: 767.5px) {
+  body,
+  html {
+    font-size: 8px;
+  }
 
-body,
-html{
-font-size:8px;
-}
+  .church-title {
+    font-size: 1.55rem;
+    max-width: 230px;
+    white-space: normal;
+  }
 
-/* banner */
-.banner-wrapper{
-min-height:550px;
-}
+  .hero-section {
+    min-height: 620px;
+  }
 
+  .hero-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .main-btn,
+  .secondary-btn {
+    width: 100%;
+  }
+
+  .quick-link-card,
+  .update-card {
+    padding: 2.5rem;
+  }
+
+  .stat-row {
+    grid-template-columns: 1fr;
+  }
+
+  .section-image {
+    height: 340px;
+  }
 }
 
 /* Media Query 590px */
-@media (max-width:590px){
+@media (max-width: 590px) {
+  body,
+  html {
+    font-size: 7px;
+  }
 
-body,
-html{
-font-size:7px;
-}
+  .header .navbar-brand img {
+    height: 44px;
+    width: 44px;
+  }
 
-/* footer */
-.link-widget a img{
-width:30px;
-height:30px;
-}
+  .hero-content {
+    padding-bottom: 6rem;
+    padding-top: 6rem;
+  }
 
+  .section-image {
+    height: 300px;
+  }
+
+  .link-widget a img {
+    height: 30px;
+    width: 30px;
+  }
 }
 
 /* Media Query 390px */
-@media (max-width:390.4px){
+@media (max-width: 390.4px) {
+  .church-title {
+    max-width: 190px;
+  }
 
-h1{
-font-size:27px;
-}
-
-h2{
-font-size:25px;
-}
-
+  .hero-section {
+    min-height: 560px;
+  }
 }
