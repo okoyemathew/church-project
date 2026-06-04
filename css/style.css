@@ -360,6 +360,11 @@ a:hover,
   width: 100%;
 }
 
+.section-image.about-image {
+  height: auto;
+  object-fit: contain;
+}
+
 .about-section p:not(.section-kicker),
 .community-section p:not(.section-kicker) {
   margin-bottom: 1.6rem;
