@@ -762,13 +762,16 @@ a:hover,
 }
 
 .admin-sidebar .nav-link {
+  border: 0;
   border-radius: 8px;
   color: var(--white-color);
+  display: block;
   font-family: var(--secondary-font);
-  font-size: 1.35rem;
-  font-weight: 700;
+  font-size: 1.45rem;
+  font-weight: 800;
   margin-bottom: 0.8rem;
   padding: 1rem 1.2rem;
+  text-align: left;
 }
 
 .admin-sidebar .nav-link.active,
@@ -792,6 +795,7 @@ a:hover,
 .admin-card {
   background: var(--light-color);
   border-radius: 8px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
   padding: 2rem;
 }
 
@@ -801,6 +805,14 @@ a:hover,
   font-family: var(--secondary-font);
   font-size: 3.2rem;
   font-weight: 900;
+}
+
+.admin-card p {
+  color: var(--ink-color);
+  font-family: var(--secondary-font);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 1rem;
 }
 
 .form-label {
