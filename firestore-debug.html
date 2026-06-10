@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Firestore Debug</title>
+  <style>
+    body {
+      background: #f5f1e8;
+      color: #12305f;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 24px;
+    }
+
+    button {
+      background: #caa052;
+      border: 0;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 12px 18px;
+    }
+
+    pre {
+      background: #111827;
+      border: 2px solid #caa052;
+      border-radius: 8px;
+      color: #e5e7eb;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-top: 20px;
+      max-height: 70vh;
+      overflow: auto;
+      padding: 16px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>Firestore Debug</h1>
+  <p>This page uses a brand new minimal Firebase app and writes to <strong>debugTest</strong>.</p>
+  <button type="button" id="run-debug">Run Debug Write</button>
+  <button type="button" id="run-rest-debug">Run REST Probe</button>
+  <pre id="debug-output"></pre>
+
+  <script type="module">
+    const output = document.getElementById("debug-output");
+    const runButton = document.getElementById("run-debug");
+    const runRestButton = document.getElementById("run-rest-debug");
+
+    function safeValue(value) {
+      if (value instanceof Error) {
+        return {
+          name: value.name,
+          code: value.code,
+          message: value.message,
+          stack: value.stack
+        };
+      }
+
+      try {
+        return JSON.parse(JSON.stringify(value));
+      } catch {
+        return String(value);
+      }
+    }
+
+    function log(message, data) {
+      const time = new Date().toLocaleTimeString();
+      const line = data === undefined
+        ? `[${time}] ${message}`
+        : `[${time}] ${message}\n${JSON.stringify(safeValue(data), null, 2)}`;
+
+      output.textContent += `${line}\n\n`;
+      output.scrollTop = output.scrollHeight;
+      console.log(`[Firestore Debug] ${message}`, data ?? "");
+    }
+
+    function isFirestoreUrl(url) {
+      return String(url).includes("firestore.googleapis.com")
+        || String(url).includes("google.firestore.v1.Firestore");
+    }
+
+    function installNetworkCapture() {
+      const originalFetch = window.fetch;
+      window.fetch = async (...args) => {
+        const url = args[0]?.url || args[0];
+
+        if (isFirestoreUrl(url)) {
+          log("FETCH REQUEST", {
+            url: String(url),
+            method: args[1]?.method || "GET",
+            body: args[1]?.body || null
+          });
+        }
+
+        const response = await originalFetch(...args);
+
+        if (isFirestoreUrl(url)) {
+          let responseBody = "";
+          try {
+            responseBody = await response.clone().text();
+          } catch (error) {
+            responseBody = `Unable to read response body: ${error.message}`;
+          }
+
+          log("FETCH RESPONSE", {
+            url: String(url),
+            status: response.status,
+            statusText: response.statusText,
+            body: responseBody
+          });
+        }
+
+        return response;
+      };
+
+      const originalOpen = XMLHttpRequest.prototype.open;
+      const originalSend = XMLHttpRequest.prototype.send;
+
+      XMLHttpRequest.prototype.open = function(method, url, ...rest) {
+        this.__debugMethod = method;
+        this.__debugUrl = url;
+        return originalOpen.call(this, method, url, ...rest);
+      };
+
+      XMLHttpRequest.prototype.send = function(body) {
+        if (isFirestoreUrl(this.__debugUrl)) {
+          log("XHR REQUEST", {
+            url: String(this.__debugUrl),
+            method: this.__debugMethod,
+            body: body || null
+          });
+
+          this.addEventListener("loadend", () => {
+            log("XHR RESPONSE", {
+              url: String(this.__debugUrl),
+              status: this.status,
+              statusText: this.statusText,
+              body: this.responseText || ""
+            });
+          });
+
+          this.addEventListener("error", () => {
+            log("XHR ERROR", {
+              url: String(this.__debugUrl),
+              status: this.status,
+              statusText: this.statusText,
+              body: this.responseText || ""
+            });
+          });
+        }
+
+        return originalSend.call(this, body);
+      };
+    }
+
+    installNetworkCapture();
+    log("Network capture installed before Firebase SDK imports");
+
+    const { getApp, getApps, initializeApp } = await import("https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js");
+    const {
+      addDoc,
+      collection,
+      getFirestore
+    } = await import("https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js");
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBxEE4kSorRTD5B3t4nyay2kb9iye_c-2k",
+      authDomain: "holy-family-church-karad-da9de.firebaseapp.com",
+      projectId: "holy-family-church-karad-da9de",
+      storageBucket: "holy-family-church-karad-da9de.firebasestorage.app",
+      messagingSenderId: "354915915415",
+      appId: "1:354915915415:web:e1edb353304a9f52573bd2"
+    };
+
+    log("Firebase app config", firebaseConfig);
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const databaseId = db?._databaseId?.database || db?._databaseId?.databaseId || "(default)";
+    const databasePath = `projects/${app.options.projectId}/databases/${databaseId}`;
+    const encodedDatabasePath = encodeURIComponent(databasePath);
+    const firestoreRestDocumentsEndpoint = `https://firestore.googleapis.com/v1/projects/${app.options.projectId}/databases/${databaseId}/documents`;
+    const firestoreRestDebugEndpoint = `${firestoreRestDocumentsEndpoint}/debugRest?key=${firebaseConfig.apiKey}`;
+    const firestoreWebChannelWriteEndpoint = `https://firestore.googleapis.com/google.firestore.v1.Firestore/Write/channel?database=${encodedDatabasePath}`;
+
+    log("Brand new Firebase app initialized");
+    log("getApp().options", getApp().options);
+    log("getApps()", getApps().map((firebaseApp) => ({
+      name: firebaseApp.name,
+      options: firebaseApp.options
+    })));
+    log("Brand new Firestore instance", {
+      appName: app.name,
+      projectId: app.options.projectId,
+      databaseId,
+      appProjectId: db.app?.options?.projectId,
+      expectedDatabasePath: databasePath,
+      firestoreRestDocumentsEndpoint,
+      firestoreWebChannelWriteEndpoint
+    });
+
+    runButton.addEventListener("click", async () => {
+      output.textContent = "";
+      log("DEBUG WRITE START");
+
+      const debugCollection = collection(db, "debugTest");
+      const payload = { test: true, createdAt: Date.now() };
+
+      log("db object summary", {
+        appName: db.app?.name,
+        projectId: db.app?.options?.projectId,
+        databaseId: db?._databaseId?.database || db?._databaseId?.databaseId || "(default)"
+      });
+      console.log("DEBUG db object", db);
+
+      log("projectId", app.options.projectId);
+      log("collection path", {
+        collectionRefPath: debugCollection.path,
+        expectedFullPath: `${databasePath}/documents/${debugCollection.path}`,
+        firestoreRestCollectionEndpoint: `${firestoreRestDocumentsEndpoint}/${debugCollection.path}`,
+        firestoreWebChannelWriteEndpoint
+      });
+      log("BEFORE await addDoc(collection(db, \"debugTest\"), { test: true })", payload);
+
+      try {
+        const result = await addDoc(debugCollection, payload);
+        log("AFTER await addDoc(collection(db, \"debugTest\"), { test: true })", {
+          documentId: result.id,
+          documentPath: result.path
+        });
+        console.log("DEBUG WRITE SUCCESS");
+        log("DEBUG WRITE SUCCESS");
+      } catch (error) {
+        log("DEBUG WRITE ERROR", error);
+        console.error("DEBUG WRITE ERROR", error);
+      }
+    });
+
+    runRestButton.addEventListener("click", async () => {
+      output.textContent = "";
+      log("REST PROBE START");
+      log("getApp().options", getApp().options);
+      log("REST request URL", firestoreRestDebugEndpoint);
+
+      const body = {
+        fields: {
+          test: { booleanValue: true },
+          source: { stringValue: "browser-rest-debug" },
+          createdAt: { integerValue: String(Date.now()) }
+        }
+      };
+
+      log("BEFORE await fetch(REST create document)", body);
+
+      try {
+        const response = await fetch(firestoreRestDebugEndpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        });
+        const responseBody = await response.text();
+
+        log("AFTER await fetch(REST create document)", {
+          url: firestoreRestDebugEndpoint,
+          status: response.status,
+          statusText: response.statusText,
+          body: responseBody
+        });
+      } catch (error) {
+        log("REST PROBE ERROR", error);
+        console.error("REST PROBE ERROR", error);
+      }
+    });
+  </script>
+</body>
+</html>

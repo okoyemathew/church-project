@@ -1,0 +1,67 @@
+[
+  {
+    "type": "log",
+    "text": "[Firestore Debug] Network capture installed before Firebase SDK imports ",
+    "timestamp": "9/6/2026, 6:23:03 pm"
+  },
+  {
+    "type": "log",
+    "text": "[Firestore Debug] Firebase app config Object",
+    "timestamp": "9/6/2026, 6:23:05 pm"
+  },
+  {
+    "type": "log",
+    "text": "[Firestore Debug] Brand new Firebase app initialized ",
+    "timestamp": "9/6/2026, 6:23:05 pm"
+  },
+  {
+    "type": "log",
+    "text": "[Firestore Debug] getApp().options Object",
+    "timestamp": "9/6/2026, 6:23:05 pm"
+  },
+  {
+    "type": "log",
+    "text": "[Firestore Debug] getApps() Array(1)",
+    "timestamp": "9/6/2026, 6:23:05 pm"
+  },
+  {
+    "type": "log",
+    "text": "[Firestore Debug] Brand new Firestore instance Object",
+    "timestamp": "9/6/2026, 6:23:05 pm"
+  },
+  {
+    "type": "log",
+    "text": "[Firestore Debug] REST PROBE START ",
+    "timestamp": "9/6/2026, 6:23:08 pm"
+  },
+  {
+    "type": "log",
+    "text": "[Firestore Debug] getApp().options Object",
+    "timestamp": "9/6/2026, 6:23:08 pm"
+  },
+  {
+    "type": "log",
+    "text": "[Firestore Debug] REST request URL https://firestore.googleapis.com/v1/projects/holy-family-church-karad-da9de/databases/(default)/documents/debugRest?key=AIzaSyBxEE4kSorRTD5B3t4nyay2kb9iye_c-2k",
+    "timestamp": "9/6/2026, 6:23:08 pm"
+  },
+  {
+    "type": "log",
+    "text": "[Firestore Debug] BEFORE await fetch(REST create document) Object",
+    "timestamp": "9/6/2026, 6:23:08 pm"
+  },
+  {
+    "type": "log",
+    "text": "[Firestore Debug] FETCH REQUEST Object",
+    "timestamp": "9/6/2026, 6:23:08 pm"
+  },
+  {
+    "type": "log",
+    "text": "[Firestore Debug] FETCH RESPONSE Object",
+    "timestamp": "9/6/2026, 6:23:13 pm"
+  },
+  {
+    "type": "log",
+    "text": "[Firestore Debug] AFTER await fetch(REST create document) Object",
+    "timestamp": "9/6/2026, 6:23:13 pm"
+  }
+]

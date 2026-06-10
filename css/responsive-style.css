@@ -57,6 +57,14 @@
   .cta-section {
     text-align: center;
   }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .admin-sidebar {
+    min-height: auto;
+  }
 }
 
 /* Media Query 767px */
@@ -97,6 +105,14 @@
 
   .section-image {
     height: 340px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .content-card img {
+    height: 220px;
   }
 }
 

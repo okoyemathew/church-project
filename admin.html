@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Holy Family Church Karad</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive-style.css" />
+</head>
+<body data-protected="admin">
+  <header id="full_nav"><div class="header fixed-top"><div class="container"><nav class="navbar navbar-expand-lg"><a class="navbar-brand d-flex align-items-center" href="index.html"><img src="images/saintign-300x169.jpg" alt="Holy Family Church Karad logo" /><span class="church-title ms-3"><span>Holy Family Church Karad</span><small>Sub-station Satara</small></span></a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-stream navbar-toggler-icon"></i></button><div class="collapse navbar-collapse" id="main-nav"><ul class="navbar-nav ms-auto"><li class="nav-item"><a class="nav-link" href="index.html">Home</a></li><li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li><li class="nav-item"><button class="btn main-btn ms-lg-3" type="button" data-logout>Logout</button></li></ul></div></nav></div></div></header>
+  <main>
+    <section class="page-title-section"><div class="container"><p class="eyebrow">Admin</p><h1>Dashboard</h1><p>Manage parish content, schedules, events, gallery images, and publishing status.</p></div></section>
+    <section class="section-pad">
+      <div class="container">
+        <div id="upload-progress" class="progress d-none mb-4" data-upload-progress><div class="progress-bar" role="progressbar" style="width:0%"></div></div>
+        <div data-admin-status></div>
+        <div class="admin-shell">
+          <div class="row g-0">
+            <div class="col-lg-3">
+              <div class="admin-sidebar">
+                <button class="nav-link active w-100 text-start" type="button" data-admin-nav="overview">Dashboard Overview</button>
+                <button class="nav-link w-100 text-start" type="button" data-admin-nav="articles">Articles Management</button>
+                <button class="nav-link w-100 text-start" type="button" data-admin-nav="announcements">Announcements Management</button>
+                <button class="nav-link w-100 text-start" type="button" data-admin-nav="notices">Notices Management</button>
+                <button class="nav-link w-100 text-start" type="button" data-admin-nav="events">Events Management</button>
+                <button class="nav-link w-100 text-start" type="button" data-admin-nav="masses">Mass Schedules Management</button>
+                <button class="nav-link w-100 text-start" type="button" data-admin-nav="gallery">Gallery Management</button>
+              </div>
+            </div>
+            <div class="col-lg-9">
+              <div class="admin-content">
+                <section id="overview" class="admin-panel active" data-admin-panel>
+                  <div class="row g-4">
+                    <div class="col-md"><div class="admin-card"><span data-stat="articles">0</span><p>Total Articles</p></div></div>
+                    <div class="col-md"><div class="admin-card"><span data-stat="announcements">0</span><p>Total Announcements</p></div></div>
+                    <div class="col-md"><div class="admin-card"><span data-stat="notices">0</span><p>Total Notices</p></div></div>
+                    <div class="col-md"><div class="admin-card"><span data-stat="events">0</span><p>Total Events</p></div></div>
+                    <div class="col-md"><div class="admin-card"><span data-stat="gallery">0</span><p>Total Gallery Images</p></div></div>
+                  </div>
+                </section>
+                <section id="articles" class="admin-panel" data-admin-panel>
+                  <h2>Articles</h2>
+                  <form class="row g-3 mb-5" data-admin-form="articles">
+                    <input type="hidden" name="id" />
+                    <div class="col-md-6"><label class="form-label">Title</label><input class="form-control" name="title" required /></div>
+                    <div class="col-md-6"><label class="form-label">Slug</label><input class="form-control" name="slug" /></div>
+                    <div class="col-md-6"><label class="form-label">Author</label><input class="form-control" name="author" /></div>
+                    <div class="col-md-8"><label class="form-label">Featured Image URL</label><input class="form-control" name="featuredImage" readonly /></div>
+                    <div class="col-md-4 d-flex align-items-end"><button class="btn main-btn w-100" type="button" data-cloudinary-upload data-cloudinary-field="featuredImage">Upload Image</button></div>
+                    <div class="col-12"><img class="admin-image-preview d-none" data-image-preview="featuredImage" src="" alt="Featured image preview" /></div>
+                    <div class="col-12"><label class="form-label">Excerpt</label><textarea class="form-control" name="excerpt" rows="2" required></textarea></div>
+                    <div class="col-12"><label class="form-label">Content</label><textarea class="form-control" name="content" rows="6" required></textarea></div>
+                    <div class="col-12"><label class="form-label"><input class="form-check-input me-2" name="published" type="checkbox" />Published</label></div>
+                    <div class="col-12"><button class="btn main-btn" type="submit">Save Article</button></div>
+                  </form>
+                  <div class="table-responsive"><table class="table align-middle"><tbody id="articles-table"></tbody></table></div>
+                </section>
+                <section id="announcements" class="admin-panel" data-admin-panel>
+                  <h2>Announcements</h2>
+                  <form class="row g-3 mb-5" data-admin-form="announcements"><input type="hidden" name="id" /><div class="col-12"><label class="form-label">Title</label><input class="form-control" name="title" required /></div><div class="col-12"><label class="form-label">Description</label><textarea class="form-control" name="description" rows="4" required></textarea></div><div class="col-12"><label class="form-label"><input class="form-check-input me-2" name="published" type="checkbox" />Published</label></div><div class="col-12"><button class="btn main-btn" type="submit">Save Announcement</button></div></form>
+                  <div class="table-responsive"><table class="table align-middle"><tbody id="announcements-table"></tbody></table></div>
+                </section>
+                <section id="notices" class="admin-panel" data-admin-panel>
+                  <h2>Notices</h2>
+                  <form class="row g-3 mb-5" data-admin-form="notices"><input type="hidden" name="id" /><div class="col-md-8"><label class="form-label">Title</label><input class="form-control" name="title" required /></div><div class="col-md-4"><label class="form-label">Date</label><input class="form-control" name="date" type="date" required /></div><div class="col-12"><label class="form-label">Description</label><textarea class="form-control" name="description" rows="4" required></textarea></div><div class="col-12"><label class="form-label"><input class="form-check-input me-2" name="published" type="checkbox" />Published</label></div><div class="col-12"><button class="btn main-btn" type="submit">Save Notice</button></div></form>
+                  <div class="table-responsive"><table class="table align-middle"><tbody id="notices-table"></tbody></table></div>
+                </section>
+                <section id="events" class="admin-panel" data-admin-panel>
+                  <h2>Events</h2>
+                  <form class="row g-3 mb-5" data-admin-form="events"><input type="hidden" name="id" /><div class="col-md-8"><label class="form-label">Title</label><input class="form-control" name="title" required /></div><div class="col-md-4"><label class="form-label">Event Date</label><input class="form-control" name="eventDate" type="date" required /></div><div class="col-md-6"><label class="form-label">Location</label><input class="form-control" name="location" /></div><div class="col-md-8"><label class="form-label">Image URL</label><input class="form-control" name="imageUrl" readonly /></div><div class="col-md-4 d-flex align-items-end"><button class="btn main-btn w-100" type="button" data-cloudinary-upload data-cloudinary-field="imageUrl">Upload Image</button></div><div class="col-12"><img class="admin-image-preview d-none" data-image-preview="imageUrl" src="" alt="Event image preview" /></div><div class="col-12"><label class="form-label">Description</label><textarea class="form-control" name="description" rows="4" required></textarea></div><div class="col-12"><label class="form-label"><input class="form-check-input me-2" name="published" type="checkbox" />Published</label></div><div class="col-12"><button class="btn main-btn" type="submit">Save Event</button></div></form>
+                  <div class="table-responsive"><table class="table align-middle"><tbody id="events-table"></tbody></table></div>
+                </section>
+                <section id="masses" class="admin-panel" data-admin-panel>
+                  <h2>Mass Schedules</h2>
+                  <form class="row g-3 mb-5" data-admin-form="masses"><input type="hidden" name="id" /><div class="col-md-4"><label class="form-label">Day</label><select class="form-select" name="day" required><option>Sunday</option><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option></select></div><div class="col-md-4"><label class="form-label">Mass Time</label><input class="form-control" name="massTime" required /></div><div class="col-md-4"><label class="form-label">Language</label><input class="form-control" name="language" /></div><div class="col-12"><label class="form-label">Description</label><textarea class="form-control" name="description" rows="3"></textarea></div><div class="col-12"><button class="btn main-btn" type="submit">Save Schedule</button></div></form>
+                  <div class="table-responsive"><table class="table align-middle"><tbody id="masses-table"></tbody></table></div>
+                </section>
+                <section id="gallery" class="admin-panel" data-admin-panel>
+                  <h2>Gallery</h2>
+                  <form class="row g-3 mb-5" data-admin-form="gallery"><input type="hidden" name="id" /><input type="hidden" name="imageUrl" /><div class="col-md-8"><label class="form-label">Caption</label><input class="form-control" name="caption" /></div><div class="col-md-4 d-flex align-items-end"><button class="btn main-btn w-100" type="button" data-cloudinary-upload data-cloudinary-field="imageUrl">Upload Image</button></div><div class="col-12"><img class="admin-image-preview d-none" data-image-preview="imageUrl" src="" alt="Gallery image preview" /></div><div class="col-12"><button class="btn main-btn" type="submit">Save Gallery Image</button></div></form>
+                  <div class="table-responsive"><table class="table align-middle"><tbody id="gallery-table"></tbody></table></div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer_wrapper wrapper"><div class="container"><div class="row align-items-center mb-5"><div class="col-lg-4 col-sm-6 mb-5 mb-lg-0 footer-logo"><img src="images/saintign-300x169.jpg" alt="Holy Family Church Karad logo" /><p class="mt-3 church-name">Holy Family Church Karad</p><p class="church-subname">Sub-station Satara</p></div><div class="col-lg-4 col-sm-6 mb-5 mb-lg-0"><h5><a href="tel:+917972892582">+91 7972892582</a></h5><h5><a href="mailto:eruditecoder9@gmail.com">eruditecoder9@gmail.com</a></h5><h5>A-wing, 2nd Floor TMV</h5></div><div class="col-lg-4 col-sm-6 mb-5 mb-lg-0"><ul class="link-widget p-0"><li><a href="#"><img src="./images/squarfacebook-logo.webp" alt="Facebook" /></a></li><li><a href="#"><img src="./images/instagram-logo.webp" alt="Instagram" /></a></li><li><a href="#"><img src="./images/youtube-icon.webp" alt="YouTube" /></a></li><li><a href="#"><img src="./images/x-twitter.webp" alt="X" /></a></li></ul></div></div></div><div class="container-fluid copyright-section"><p>&copy; 2025 Eruditecoder. All Rights Reserved</p></div></footer>
+  <script type="module" src="js/layout.js"></script><script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script><script src="https://upload-widget.cloudinary.com/latest/global/all.js" type="text/javascript"></script><script type="module" src="js/auth.js"></script><script type="module" src="js/admin.js"></script>
+</body>
+</html>
